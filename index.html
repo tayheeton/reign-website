@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>REIGN — Built for What Moves You</title>
+
+  <meta
+    name="description"
+    content="REIGN waterproof bike jackets. Built for movement, weather, and everyday city life."
+  />
+
+  <style>
+    :root {
+      --black: #050505;
+      --black-soft: #0d0d0d;
+      --white: #f7f7f4;
+      --gray: #a5a5a0;
+      --line: rgba(255, 255, 255, 0.18);
+      --line-soft: rgba(255, 255, 255, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 50% 17%,
+          rgba(255, 255, 255, 0.1),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 8% 50%,
+          rgba(255, 255, 255, 0.045),
+          transparent 24%
+        ),
+        var(--black);
+    }
+
+    .container {
+      width: min(1440px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .header-logo {
+      width: 150px;
+      height: auto;
+      filter: brightness(1.2) contrast(1.1);
+    }
+
+    .navigation {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      color: var(--gray);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .navigation a {
+      transition:
+        color 180ms ease,
+        opacity 180ms ease;
+    }
+
+    .navigation a:hover {
+      color: var(--white);
+    }
+
+    .nav-button {
+      padding: 13px 18px;
+      border: 1px solid var(--white);
+      color: var(--white);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 36px 0 80px;
+    }
+
+    .hero-heading {
+      max-width: 920px;
+      margin: 0 auto 44px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 20px;
+      color: var(--gray);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(48px, 9vw, 132px);
+      font-weight: 900;
+      letter-spacing: -0.09em;
+      line-height: 0.82;
+      text-transform: uppercase;
+    }
+
+    .hero-description {
+      max-width: 540px;
+      margin: 28px auto 0;
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* Product image */
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #151515;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+    }
+
+    .product-card::before {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.18),
+          transparent 24%,
+          transparent 76%,
+          rgba(0, 0, 0, 0.18)
+        ),
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          transparent 30%,
+          rgba(0, 0, 0, 0.16)
+        );
+      mix-blend-mode: overlay;
+    }
+
+    .product-image {
+      width: 100%;
+      height: auto;
+      min-height: 420px;
+      object-fit: cover;
+      object-position: center;
+      filter: grayscale(1) contrast(1.08);
+    }
+
+    .product-caption {
+      position: absolute;
+      z-index: 2;
+      right: 24px;
+      bottom: 22px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.27em;
+      text-transform: uppercase;
+    }
+
+    .product-caption span:last-child {
+      color: rgba(255, 255, 255, 0.68);
+      text-align: right;
+    }
+
+    /* Call to action */
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 25px;
+      border: 1px solid var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition:
+        background 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .button-primary:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    .button-secondary {
+      border-color: var(--line);
+      color: var(--white);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--white);
+    }
+
+    /* Feature bar */
+
+    .feature-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 0 0 110px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .feature {
+      padding: 26px 22px;
+      border-right: 1px solid var(--line);
+    }
+
+    .feature:last-child {
+      border-right: 0;
+    }
+
+    .feature-number {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--gray);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+    }
+
+    .feature h3 {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .feature p {
+      max-width: 180px;
+      margin: 0;
+      color: var(--gray);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* Logo statement */
+
+    .brand-statement {
+      display: flex;
+      min-height: 430px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 110px;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.1),
+          transparent 42%
+        ),
+        #070707;
+      text-align: center;
+    }
+
+    .statement-content {
+      width: 100%;
+    }
+
+    .statement-logo {
+      width: min(700px, 82%);
+      margin: 0 auto;
+      filter:
+        brightness(1.3)
+        contrast(1.15)
+        drop-shadow(0 0 22px rgba(255, 255, 255, 0.15));
+    }
+
+    .statement-text {
+      margin: 28px 0 0;
+      color: var(--gray);
+      font-size: 11px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+    }
+
+    /* Details section */
+
+    .section {
+      padding-bottom: 110px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      max-width: 700px;
+      margin: 0;
+      font-size: clamp(38px, 6vw, 86px);
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      line-height: 0.84;
+      text-transform: uppercase;
+    }
+
+    .section-label {
+      margin: 0;
+      color: var(--gray);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      line-height: 1.6;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .detail-card {
+      min-height: 270px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.055),
+          rgba(255, 255, 255, 0.01)
+        );
+    }
+
+    .detail-icon {
+      display: flex;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 60px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 20px;
+    }
+
+    .detail-card h3 {
+      margin: 0 0 12px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .detail-card p {
+      max-width: 260px;
+      margin: 0;
+      color: var(--gray);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    /* Product information */
+
+    .product-information {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      padding-bottom: 110px;
+    }
+
+    .information-panel {
+      min-height: 330px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      background: var(--black-soft);
+    }
+
+    .information-panel h2 {
+      max-width: 680px;
+      margin: 0 0 22px;
+      font-size: clamp(32px, 5vw, 70px);
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      line-height: 0.88;
+      text-transform: uppercase;
+    }
+
+    .information-panel h3 {
+      margin: 0 0 25px;
+      color: var(--gray);
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+    }
+
+    .information-panel p {
+      max-width: 600px;
+      margin: 0;
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .spec-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .spec-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 12px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .spec-list li:first-child {
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .spec-list span:first-child {
+      color: var(--gray);
+    }
+
+    .spec-list span:last-child {
+      text-align: right;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      padding: 30px 0 42px;
+      border-top: 1px solid var(--line);
+      color: var(--gray);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      width: 100px;
+      filter: brightness(1.2);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .navigation {
+        gap: 14px;
+      }
+
+      .navigation a:not(.nav-button) {
+        display: none;
+      }
+
+      .feature-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature:nth-child(2) {
+        border-right: 0;
+      }
+
+      .feature:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .details-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-information {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 30px, 1440px);
+      }
+
+      .site-header {
+        padding: 20px 0;
+      }
+
+      .header-logo {
+        width: 120px;
+      }
+
+      .hero {
+        padding-top: 28px;
+        padding-bottom: 55px;
+      }
+
+      .hero-heading {
+        margin-bottom: 30px;
+      }
+
+      .hero-title {
+        font-size: clamp(48px, 16vw, 90px);
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .product-image {
+        min-height: 0;
+        object-fit: contain;
+      }
+
+      .product-caption {
+        right: 14px;
+        bottom: 14px;
+        left: 14px;
+        font-size: 8px;
+        letter-spacing: 0.16em;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .feature-bar {
+        grid-template-columns: 1fr;
+        margin-bottom: 70px;
+      }
+
+      .feature {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .feature:nth-child(2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .feature:last-child {
+        border-bottom: 0;
+      }
+
+      .brand-statement {
+        min-height: 300px;
+        margin-bottom: 70px;
+      }
+
+      .statement-logo {
+        width: 92%;
+      }
+
+      .statement-text {
+        font-size: 8px;
+        letter-spacing: 0.25em;
+      }
+
+      .section {
+        padding-bottom: 70px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-title {
+        font-size: 52px;
+      }
+
+      .section-label {
+        margin-top: 22px;
+        text-align: left;
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-card {
+        min-height: 220px;
+      }
+
+      .detail-icon {
+        margin-bottom: 42px;
+      }
+
+      .product-information {
+        padding-bottom: 70px;
+      }
+
+      .information-panel {
+        min-height: auto;
+        padding: 24px;
+      }
+
+      .information-panel h2 {
+        font-size: 48px;
+      }
+
+      .footer-content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="container">
+
+      <header class="site-header">
+        <a href="#" aria-label="REIGN home">
+          <img
+            src="reign-logo.png"
+            alt="REIGN"
+            class="header-logo"
+          />
+        </a>
+
+        <nav class="navigation" aria-label="Main navigation">
+          <a href="#features">Features</a>
+          <a href="#details">Details</a>
+          <a href="#about">About</a>
+          <a href="#shop" class="nav-button">Shop jacket</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="shop">
+          <div class="hero-heading">
+            <p class="eyebrow">The first release / 001</p>
+
+            <h1 class="hero-title">
+              Built for<br />
+              what moves you.
+            </h1>
+
+            <p class="hero-description">
+              A weather-ready bike jacket designed for movement, protection,
+              and everyday city wear.
+            </p>
+          </div>
+
+          <div class="product-card">
+            <img
+              src="product-photo.jpg"
+              alt="Black REIGN waterproof bike jacket shown from the front and back"
+              class="product-image"
+            />
+
+            <div class="product-caption">
+              <span>REIGN / Bike Jacket</span>
+              <span>Clean. Functional. Versatile.</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#about" class="button button-primary">
+              Explore the jacket
+            </a>
+
+            <a href="#details" class="button button-secondary">
+              View details
+            </a>
+          </div>
+        </section>
+
+        <section class="feature-bar" id="features">
+          <article class="feature">
+            <span class="feature-number">01 / 04</span>
+            <h3>Waterproof shell</h3>
+            <p>Stay dry through changing conditions and unpredictable weather.</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">02 / 04</span>
+            <h3>Windproof build</h3>
+            <p>Protection from the elements while you are moving through the city.</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">03 / 04</span>
+            <h3>Ventilated comfort</h3>
+            <p>Underarm ventilation helps regulate comfort during the ride.</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">04 / 04</span>
+            <h3>Packable design</h3>
+            <p>Lightweight construction without unnecessary bulk.</p>
+          </article>
+        </section>
+
+        <section class="brand-statement" id="about">
+          <div class="statement-content">
+            <img
+              src="reign-logo.png"
+              alt="REIGN logo"
+              class="statement-logo"
+            />
+
+            <p class="statement-text">
+              Built for motion. Ready for weather.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="details">
+          <div class="section-heading">
+            <h2 class="section-title">
+              Designed<br />
+              to move.
+            </h2>
+
+            <p class="section-label">
+              Function without<br />
+              sacrificing form.
+            </p>
+          </div>
+
+          <div class="details-grid">
+            <article class="detail-card">
+              <div class="detail-icon">◌</div>
+              <h3>Detachable hood</h3>
+              <p>
+                A versatile hood system that adapts to changing weather and
+                everyday styling.
+              </p>
+            </article>
+
+            <article class="detail-card">
+              <div class="detail-icon">⌁</div>
+              <h3>Waterproof zips</h3>
+              <p>
+                Secure zip construction helps keep the weather out while
+                protecting what you carry.
+              </p>
+            </article>
+
+            <article class="detail-card">
+              <div class="detail-icon">＋</div>
+              <h3>Multi-pocket system</h3>
+              <p>
+                Functional storage for the essentials you need while commuting
+                or moving through the city.
+              </p>
+            </article>
+
+            <article class="detail-card">
+              <div class="detail-icon">↔</div>
+              <h3>Underarm ventilation</h3>
+              <p>
+                Breathable comfort designed for active movement and daily wear.
+              </p>
+            </article>
+
+            <article class="detail-card">
+              <div class="detail-icon">▱</div>
+              <h3>Adjustable cuffs</h3>
+              <p>
+                Customizable cuffs help create a secure, comfortable fit around
+                the wrists.
+              </p>
+            </article>
+
+            <article class="detail-card">
+              <div class="detail-icon">⌇</div>
+              <h3>Minimal silhouette</h3>
+              <p>
+                A clean black profile made to work on the bike and off the bike.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="product-information">
+          <div class="information-panel">
+            <h3>The REIGN approach</h3>
+
+            <h2>
+              Safety<br />
+              meets style.
+            </h2>
+
+            <p>
+              REIGN is made for people who refuse to choose between protection
+              and personal style. Every detail is designed around movement,
+              weather, and the way you actually live.
+            </p>
+          </div>
+
+          <div class="information-panel">
+            <h3>Product details</h3>
+
+            <ul class="spec-list">
+              <li>
+                <span>Shell</span>
+                <span>Waterproof</span>
+              </li>
+
+              <li>
+                <span>Protection</span>
+                <span>Windproof</span>
+              </li>
+
+              <li>
+                <span>Ventilation</span>
+                <span>Underarm panels</span>
+              </li>
+
+              <li>
+                <span>Hood</span>
+                <span>Detachable</span>
+              </li>
+
+              <li>
+                <span>Storage</span>
+                <span>Multi-pocket</span>
+              </li>
+
+              <li>
+                <span>Finish</span>
+                <span>Matte black</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-content">
+          <img
+            src="reign-logo.png"
+            alt="REIGN"
+            class="footer-logo"
+          />
+
+          <span>Built for what moves you</span>
+
+          <span>© 2026 REIGN</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>
